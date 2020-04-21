@@ -3,3 +3,6 @@ Anotaciones sobre el curso:
     Al añadir la biblioteca keypress en la lección 13 no explica que la
         biblioteca keypress tiene que estar importada en el html antes que el 
         juego.js por tema de dependencias.
+    En algunas lecciones como en la 20, comienza con un codigo cambiado (nuevo tablero con nuevos colores), 
+        pero en el codigo proporcionado nos da el codigo al acabar la clase. Estaría bien que se proporcionase
+        el codigo inicial además del final.
