@@ -1,0 +1,5 @@
+Anotaciones sobre el curso:
+    En las condiciones hacer "== true" se podría omitir.
+    Al añadir la biblioteca keypress en la lección 13 no explica que la
+        biblioteca keypress tiene que estar importada en el html antes que el 
+        juego.js por tema de dependencias.
