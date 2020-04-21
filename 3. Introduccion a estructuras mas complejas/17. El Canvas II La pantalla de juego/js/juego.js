@@ -26,8 +26,6 @@ document.addEventListener("keydown", function(tecla){
 })
 
 
-
-
 var protagonista = function(x, y){
     this.x = x;
     this.y = y;

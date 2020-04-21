@@ -9,8 +9,6 @@ function inicializa(){
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
 
-
-
     setInterval(function(){
         principal();
     }, 1000/fps);
