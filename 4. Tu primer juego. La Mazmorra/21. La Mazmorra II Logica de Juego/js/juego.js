@@ -6,12 +6,14 @@ var anchoF = 40;
 var altoF = 40;
 
 var muro = "#006600";
-var puerta = "#0099cc";
-var tierra = "#996633";
 var llave = "#ffff00";
+var tierra = "#996633";
+var puerta = "#0099cc";
+
 var protagonista;
 
-
+var imgGrass;
+var imgForest;
 
 
 
@@ -23,8 +25,8 @@ var escenario = [
     [0,0,2,2,2,0,0,2,0,0,0,2,0,0,0],
     [0,2,2,0,0,0,0,2,0,0,0,2,0,0,0],
     [0,0,2,0,0,0,2,2,2,0,0,2,2,2,0],
-    [0,2,2,2,0,0,2,0,0,0,2,0,0,2,0],
-    [0,2,2,2,0,0,2,0,0,2,2,2,2,2,0],
+    [0,2,2,2,0,0,2,0,0,0,1,0,0,2,0],
+    [0,2,2,3,0,0,2,0,0,2,2,2,2,2,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   ]
 
@@ -33,6 +35,32 @@ var jugador = function(){
     this.x = 1;
     this.y = 1;
     this.color = "#ff5050";
+    this.llave = false;
+
+
+
+    this.logicaObjetos = function(){
+        var objeto = escenario[this.y][this.x];
+        if(objeto == 3){
+            this.llave = true;
+            escenario[this.y][this.x] = 2;
+        }
+        else if(objeto == 1){
+            if(this.llave)
+                this.victoria();
+            else
+                console.log("TE FALTA LA LLAVE");
+        }
+    }
+
+    this.victoria = function(){
+        console.log("HAS GANADO");
+        this.x = 1;
+        this.y = 1;
+        this.llave = false;
+        escenario[8][3] = 3;
+
+    }
 
     this.dibuja = function(){
         ctx.fillStyle = this.color;
@@ -47,21 +75,32 @@ var jugador = function(){
     }
 
     this.arriba = function(){
-        if(!this.fuera(this.x, this.y - 1))
+        if(!this.fuera(this.x, this.y - 1)){
             this.y--;
+            this.logicaObjetos();
+        }
     }
 
     this.abajo = function(){
-        if(!this.fuera(this.x, this.y + 1))
+        if(!this.fuera(this.x, this.y + 1)){
             this.y++;
+            this.logicaObjetos();
+        }
+            
     }
     this.derecha = function(){
-        if(!this.fuera(this.x + 1, this.y))
+        if(!this.fuera(this.x + 1, this.y)){
             this.x++;
+            this.logicaObjetos();
+        }
+            
     }
     this.izquierda = function(){
-        if(!this.fuera(this.x - 1, this.y))
+        if(!this.fuera(this.x - 1, this.y)){
             this.x--;
+            this.logicaObjetos();
+        }
+            
     }
 }
 
@@ -70,17 +109,21 @@ function dibujaEscenario(){
     for(i=0; i < escenario.length; i++){
         for(j=0; j < escenario[i].length; j++){
             if(escenario[i][j] == 0)
-                color = muro;
-            else if (escenario[i][j] == 1)
-                color = puerta;
+                ctx.drawImage(imgForest, j*anchoF, i*altoF);
             else if (escenario[i][j] == 2)
-                color = tierra;
-            else if (escenario[i][j] == 3)
-                color = llave;
-            
-
-            ctx.fillStyle = color;
+                ctx.drawImage(imgGrass, j*anchoF, i*altoF);
+            else if (escenario[i][j] == 1){
+                ctx.fillStyle = puerta;
             ctx.fillRect(j*anchoF, i*altoF, anchoF, altoF);
+            }
+            else if (escenario[i][j] == 3){
+                ctx.fillStyle = llave;
+                ctx.fillRect(j*anchoF, i*altoF, anchoF, altoF);
+            }
+            
+                
+
+
         }
     }
 }
@@ -91,6 +134,11 @@ function inicializa(){
     ctx = canvas.getContext("2d");
     protagonista = new jugador();
 
+    imgGrass = new Image();
+    imgGrass.src = "img/grass.png";
+
+    imgForest = new Image();
+    imgForest.src = "img/forest1.png";
 
 
     document.addEventListener("keydown", function(tecla){

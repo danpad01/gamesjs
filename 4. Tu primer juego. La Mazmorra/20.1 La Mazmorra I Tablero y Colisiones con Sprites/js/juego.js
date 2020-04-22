@@ -6,12 +6,13 @@ var anchoF = 40;
 var altoF = 40;
 
 var muro = "#006600";
-var puerta = "#0099cc";
+
 var tierra = "#996633";
-var llave = "#ffff00";
+
 var protagonista;
 
-
+var imgGrass;
+var imgForest;
 
 
 
@@ -70,17 +71,15 @@ function dibujaEscenario(){
     for(i=0; i < escenario.length; i++){
         for(j=0; j < escenario[i].length; j++){
             if(escenario[i][j] == 0)
-                color = muro;
-            else if (escenario[i][j] == 1)
-                color = puerta;
-            else if (escenario[i][j] == 2)
-                color = tierra;
-            else if (escenario[i][j] == 3)
-                color = llave;
+                ctx.drawImage(imgForest, j*anchoF, i*altoF);
+            else if (escenario[i][j] == 2){
+                ctx.drawImage(imgGrass, j*anchoF, i*altoF);
+            }
+            
+                
             
 
-            ctx.fillStyle = color;
-            ctx.fillRect(j*anchoF, i*altoF, anchoF, altoF);
+
         }
     }
 }
@@ -91,6 +90,11 @@ function inicializa(){
     ctx = canvas.getContext("2d");
     protagonista = new jugador();
 
+    imgGrass = new Image();
+    imgGrass.src = "img/grass.png";
+
+    imgForest = new Image();
+    imgForest.src = "img/forest1.png";
 
 
     document.addEventListener("keydown", function(tecla){
