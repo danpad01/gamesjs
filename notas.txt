@@ -6,3 +6,5 @@ Anotaciones sobre el curso:
     En algunas lecciones como en la 20, comienza con un codigo cambiado (nuevo tablero con nuevos colores), 
         pero en el codigo proporcionado nos da el codigo al acabar la clase. Estaría bien que se proporcionase
         el codigo inicial además del final.
+    En la leccion 22 la direccion de los enemigos solo cambian cuando chocan con algo por lo que es imposible
+        que giren en mitad de un pasillo lo que provoca que se queden atascados en la parte de arriba de una T.
